@@ -1,11 +1,12 @@
 :root {
-  --bg: #faf7f2;
-  --ink: #1a1a1a;
-  --ink-soft: rgba(26, 26, 26, 0.62);
-  --ink-faint: rgba(26, 26, 26, 0.4);
-  --accent: #E8654A;
-  --card: #ffffff;
-  --line: rgba(26, 26, 26, 0.08);
+  --bg: #04070d;
+  --ink: #e9f0fa;
+  --ink-soft: rgba(233, 240, 250, 0.62);
+  --ink-faint: rgba(233, 240, 250, 0.38);
+  --accent: #3d8bff;
+  --accent-2: #22d3ee;
+  --card: #0a1120;
+  --line: rgba(140, 170, 220, 0.14);
 }
 
 * {
@@ -15,7 +16,10 @@
 body {
   margin: 0;
   font-family: "Inter", system-ui, sans-serif;
-  background: var(--bg);
+  background:
+    radial-gradient(600px 400px at 15% 0%, rgba(61, 139, 255, 0.12), transparent 60%),
+    radial-gradient(700px 500px at 90% 100%, rgba(34, 211, 238, 0.08), transparent 60%),
+    var(--bg);
   color: var(--ink);
   min-height: 100vh;
   display: flex;
@@ -42,21 +46,24 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.04), 0 12px 32px rgba(26, 26, 26, 0.06);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 60px rgba(61, 139, 255, 0.06);
+}
+
+.avatar-ring {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 28px rgba(61, 139, 255, 0.35);
 }
 
 .avatar {
-  width: 84px;
-  height: 84px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  object-fit: cover;
+  display: block;
 }
 
 .name {
@@ -72,7 +79,10 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .bio {
@@ -95,19 +105,20 @@ body {
   width: 100%;
   padding: 15px 20px;
   border-radius: 16px;
-  background: var(--bg);
+  background: rgba(140, 170, 220, 0.05);
   border: 1px solid var(--line);
   color: var(--ink);
   text-decoration: none;
   font-size: 15px;
   font-weight: 600;
-  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
 .link:hover {
   transform: translateY(-1px);
   border-color: var(--accent);
-  background: #fff;
+  background: rgba(61, 139, 255, 0.08);
+  box-shadow: 0 0 20px rgba(61, 139, 255, 0.18);
 }
 
 .footer {
