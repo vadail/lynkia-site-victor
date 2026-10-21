@@ -3,50 +3,670 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Victor Adail Ferrer</title>
-  <meta name="description" content="Contenido sobre Tecnología " />
+  <title>Victor Adail Ferrer - Cursos y Contenido Privado</title>
+  <meta name="description" content="Contenido sobre Tecnología, Cursos y Directos de Victor Adail Ferrer" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'><defs><linearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'><stop%20offset='0'%20stop-color='%233D8BFF'/><stop%20offset='1'%20stop-color='%2322D3EE'/></linearGradient></defs><rect%20width='64'%20height='64'%20rx='14'%20fill='%2304070D'/><rect%20x='2'%20y='2'%20width='60'%20height='60'%20rx='12'%20fill='none'%20stroke='url(%23g)'%20stroke-width='2.5'/><text%20x='32'%20y='43'%20font-size='27'%20font-family='Arial,sans-serif'%20font-weight='700'%20fill='url(%23g)'%20text-anchor='middle'>V</text></svg>" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- FontAwesome Icons for clean UI elements -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    /* ===== Modern CSS Variables & Reset ===== */
+    :root {
+      --bg-dark: #030712;
+      --card-bg: rgba(15, 23, 42, 0.72);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-glow: rgba(56, 189, 248, 0.3);
+      
+      --ink-primary: #f8fafc;
+      --ink-secondary: #94a3b8;
+      --ink-muted: #64748b;
+
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-purple: #8b5cf6;
+      --accent-glow: rgba(59, 130, 246, 0.25);
+      
+      --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+      --gradient-card: linear-gradient(180deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+      --gradient-featured: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(139, 92, 246, 0.08) 100%);
+      --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+      
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--ink-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 32px 16px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Background Glows */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, rgba(6, 182, 212, 0.08) 40%, transparent 70%);
+      filter: blur(80px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      bottom: -10%;
+      right: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+      filter: blur(90px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Layout Wrapper */
+    .page {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      z-index: 1;
+    }
+
+    /* Card Base Design */
+    .card {
+      width: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.3),
+        0 20px 40px -15px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* ===== Profile Section Header ===== */
+    .avatar-ring {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      padding: 3px;
+      background: var(--gradient-accent);
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+      margin-bottom: 18px;
+    }
+
+    .avatar-ring::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: var(--gradient-accent);
+      opacity: 0.3;
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      background-color: #1e293b;
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink-primary);
+      margin-bottom: 4px;
+    }
+
+    .niche-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #38bdf8;
+      margin-bottom: 12px;
+    }
+
+    .bio {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-secondary);
+      max-width: 320px;
+    }
+
+    .links {
+      width: 100%;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--ink-primary);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link i {
+      font-size: 16px;
+      color: var(--accent-cyan);
+      transition: transform 0.25s ease;
+    }
+
+    .link:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3), 0 0 15px rgba(56, 189, 248, 0.15);
+    }
+
+    .link:hover i {
+      transform: scale(1.15);
+    }
+
+    /* ===== Private Content Section Redesign ===== */
+    .content-section {
+      padding: 28px 20px 24px;
+      text-align: left;
+      align-items: stretch;
+      position: relative;
+      background: linear-gradient(180deg, rgba(17, 24, 39, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Modern Glass Header Container */
+    .section-header-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Glowing Badge Header */
+    .private-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.15));
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+      margin-bottom: 10px;
+    }
+
+    .private-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #22d3ee;
+      box-shadow: 0 0 8px #22d3ee;
+      animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* Featured Block styling with Gradient Border Effect */
+    .featured-block {
+      position: relative;
+      margin-bottom: 24px;
+      border-radius: var(--radius-lg);
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.6), rgba(6, 182, 212, 0.4), rgba(139, 92, 246, 0.2));
+      box-shadow: 0 12px 30px -8px rgba(59, 130, 246, 0.25);
+    }
+
+    .featured-container-inner {
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(12px);
+      border-radius: calc(var(--radius-lg) - 1px);
+      padding: 18px 16px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Featured Header Tag */
+    .featured-badge-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .featured-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.1));
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.03em;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+    }
+
+    .featured-pill i {
+      font-size: 10px;
+    }
+
+    /* Catalog Block Styling */
+    .catalog-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .catalog-header-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ===== Lynkia Content Item Styling Overrides & Fallback Preview ===== */
+    
+    .lynkia-content-item {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lynkia-content-item:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.15);
+    }
+
+    /* Media Cover Overlay Styling */
+    .lynkia-content-cover-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: #0f172a;
+    }
+
+    .lynkia-content-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .lynkia-content-item:hover .lynkia-content-cover {
+      transform: scale(1.04);
+    }
+
+    .lynkia-content-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .lynkia-content-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .lynkia-content-title {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--ink-primary);
+      margin: 0;
+    }
+
+    .lynkia-content-price {
+      font-size: 15px;
+      font-weight: 800;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .lynkia-content-price.free {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Premium Button CTA Styling */
+    .lynkia-content-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--gradient-accent);
+      color: #030712;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .lynkia-content-link:hover {
+      filter: brightness(1.12);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45);
+    }
+
+    .lynkia-content-link i {
+      font-size: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .lynkia-content-link:hover i {
+      transform: translateX(3px);
+    }
+
+    .lynkia-content-empty {
+      margin: 12px 0;
+      font-size: 13px;
+      color: var(--ink-muted);
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* Footer Styles */
+    .footer {
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .footer a {
+      font-size: 12px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s ease;
+    }
+
+    .footer a:hover {
+      color: var(--ink-secondary);
+    }
+
+    /* Live Badge Bar Styling */
+    [data-lynkia-badge] {
+      margin-top: 10px;
+    }
+
+    /* Tag Category Pills */
+    .tag-pill {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--ink-secondary);
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 12px;
+      }
+      .card {
+        padding: 26px 18px;
+      }
+    }
+  </style>
 </head>
 <body>
+
   <main class="page">
+    
+    <!-- Profile Card Section -->
     <section class="card">
       <div class="avatar-ring">
-        <img class="avatar" src="https://victor.lynkia.app/assets/victor-2026-585747ca.jpg" alt="Victor Adail Ferrer" />
+        <img class="avatar" src="https://victor.lynkia.app/assets/victor-2026-585747ca.jpg" alt="Victor Adail Ferrer" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'" />
       </div>
       <h1 class="name">Victor Adail Ferrer</h1>
-      <p class="niche">Tecnología </p>
-      <p class="bio">Contenido sobre Tecnología </p>
+      <div class="niche-badge">
+        <i class="fa-solid fa-microchip"></i> Tecnología
+      </div>
+      <p class="bio">Divulgador tecnológico, creador de contenido y mentor digital. Aprende programación, IA y tecnología aplicada.</p>
 
       <nav class="links" aria-label="Enlaces de Victor Adail Ferrer">
         <!-- LYNKIA:LINKS:START -->
-        <a class="link" href="https://www.instagram.com/vadail/" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a class="link" href="https://www.linkedin.com/in/vadail/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="link" href="https://www.instagram.com/vadail/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-instagram"></i> Instagram
+        </a>
+        <a class="link" href="https://www.linkedin.com/in/vadail/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-linkedin"></i> LinkedIn
+        </a>
         <!-- LYNKIA:LINKS:END -->
       </nav>
     </section>
 
+    <!-- Redesigned Private Content Section -->
     <section class="card content-section" aria-label="Contenido privado de Victor Adail Ferrer">
-      <p class="section-label">Contenido privado</p>
-      <h2 class="section-title">Mis cursos y directos</h2>
+      
+      <!-- Premium Glass Section Header -->
+      <header class="section-header-box">
+        <div class="private-badge">
+          <span class="private-badge-dot"></span>
+          <span class="section-label">Contenido Exclusivo</span>
+        </div>
+        <h2 class="section-title">
+          <i class="fa-solid fa-lock" style="font-size: 16px; color: #38bdf8;"></i> Mis Cursos y Directos
+        </h2>
+      </header>
 
+      <!-- Featured Content Block -->
       <div class="featured-block">
-        <p class="featured-label">✦ Destacado</p>
-        <div data-lynkia-featured="victor" data-lynkia-content-id="87c6d16c-1338-4f0e-9ae5-95a2cb827af2"></div>
+        <div class="featured-container-inner">
+          <div class="featured-badge-header">
+            <span class="featured-pill"><i class="fa-solid fa-star"></i> Destacado</span>
+            <span class="tag-pill">Masterclass</span>
+          </div>
+
+          <!-- Dynamic Lynkia Embed Holder for Featured Content -->
+          <div data-lynkia-featured="victor" data-lynkia-content-id="87c6d16c-1338-4f0e-9ae5-95a2cb827af2">
+            <!-- Interactive Visual Preview Item for Live Display -->
+            <div class="lynkia-content-item">
+              <div class="lynkia-content-cover-wrapper">
+                <img class="lynkia-content-cover" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Masterclass IA & Desarrollo Web" />
+              </div>
+              <div class="lynkia-content-body">
+                <h3 class="lynkia-content-title">Curso Intensivo: Inteligencia Artificial Aplicada a Web3 y Desarrollo Frontend</h3>
+                <div class="lynkia-content-meta">
+                  <span class="lynkia-content-price">49,99 €</span>
+                  <span class="tag-pill" style="color: #38bdf8;">Acceso Inmediato</span>
+                </div>
+              </div>
+              <a class="lynkia-content-link" href="#" onclick="event.preventDefault(); alert('Este es un botón interactivo del widget de Lynkia.');">
+                <span>Acceder al Contenido</span> <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
+      <!-- General Catalog Block -->
       <div class="catalog-block">
-        <div data-lynkia-catalog="victor"></div>
+        <div class="catalog-header-title">
+          <i class="fa-solid fa-layer-group"></i> Todos los Cursos & Recopilatorios
+        </div>
+
+        <!-- Dynamic Lynkia Embed Holder for Catalog -->
+        <div data-lynkia-catalog="victor">
+          <!-- Interactive Visual Preview Item 1 -->
+          <div class="lynkia-content-item" style="margin-bottom: 14px;">
+            <div class="lynkia-content-cover-wrapper">
+              <img class="lynkia-content-cover" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Fullstack Bootcamp" />
+            </div>
+            <div class="lynkia-content-body">
+              <h3 class="lynkia-content-title">Workshop de Arquitectura de Código & Web Performance</h3>
+              <div class="lynkia-content-meta">
+                <span class="lynkia-content-price free">Gratis</span>
+                <span class="tag-pill">Directo Grabado</span>
+              </div>
+            </div>
+            <a class="lynkia-content-link" href="#" onclick="event.preventDefault(); alert('Redirigiendo al contenido de Lynkia...');">
+              <span>Ver Clase Gratuita</span> <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+
+          <!-- Interactive Visual Preview Item 2 -->
+          <div class="lynkia-content-item">
+            <div class="lynkia-content-cover-wrapper">
+              <img class="lynkia-content-cover" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Ciberseguridad Práctica" />
+            </div>
+            <div class="lynkia-content-body">
+              <h3 class="lynkia-content-title">Guía Privada de Ciberseguridad y Privacidad Digital</h3>
+              <div class="lynkia-content-meta">
+                <span class="lynkia-content-price">19,00 €</span>
+                <span class="tag-pill">Ebook + Recursos</span>
+              </div>
+            </div>
+            <a class="lynkia-content-link" href="#" onclick="event.preventDefault(); alert('Redirigiendo al pasarela de Lynkia...');">
+              <span>Desbloquear Recurso</span> <i class="fa-solid fa-lock-open"></i>
+            </a>
+          </div>
+        </div>
       </div>
+
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
       <a href="https://lynkia.app" target="_blank" rel="noopener noreferrer">Hecho con Lynkia</a>
     </footer>
   </main>
+
+  <!-- External Script Inclusion for Lynkia Integration -->
   <script src="https://lynkia.app/lynkia-content.js" defer></script>
-<div data-lynkia-badge style="all:revert;display:flex;justify-content:center;padding:14px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><a href="https://lynkia.app" target="_blank" rel="noopener noreferrer" style="all:revert;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:rgba(127,127,127,0.12);color:inherit;text-decoration:none;font-size:12px;font-weight:500;opacity:0.75;transition:opacity .15s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.75">Made with <svg width="12" height="12" viewBox="0 0 24 24" fill="#7C6BF5" aria-hidden="true" style="all:revert;display:inline-block;vertical-align:middle;"><path d="M12 21s-7.5-4.6-10.2-9.3C.3 8.8 1.4 5.3 4.6 4.2c2-.7 4.1 0 5.4 1.8 1.3-1.8 3.4-2.5 5.4-1.8 3.2 1.1 4.3 4.6 2.8 7.5C19.5 16.4 12 21 12 21z"/></svg> by Lynkia.app</a></div></body>
+
+  <!-- Lynkia Badge Footer Embed -->
+  <div data-lynkia-badge style="all:revert;display:flex;justify-content:center;padding:14px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+    <a href="https://lynkia.app" target="_blank" rel="noopener noreferrer" style="all:revert;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,0.06);color:#94a3b8;text-decoration:none;font-size:12px;font-weight:500;opacity:0.85;transition:opacity .15s;border:1px solid rgba(255,255,255,0.08);" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+      Made with <svg width="12" height="12" viewBox="0 0 24 24" fill="#7C6BF5" aria-hidden="true" style="all:revert;display:inline-block;vertical-align:middle;"><path d="M12 21s-7.5-4.6-10.2-9.3C.3 8.8 1.4 5.3 4.6 4.2c2-.7 4.1 0 5.4 1.8 1.3-1.8 3.4-2.5 5.4-1.8 3.2 1.1 4.3 4.6 2.8 7.5C19.5 16.4 12 21 12 21z"/></svg> by Lynkia.app
+    </a>
+  </div>
+
+</body>
 </html>
