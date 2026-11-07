@@ -1,8 +1,8 @@
 /* Generado por el diseño por bloques de Lynkia - se rehace al publicar desde "Bloques". */
-:root{--bg:#0e0e16;--surface:#181826;--text:#f3f3f8;--muted:#a3a3b8;--line:#2a2a3d;--accent:#111111;--accent-rgb:17,17,17;--ink:#ffffff;--r:18px;--r-sm:9px;--head:'Inter',sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--maxw:1080px;--gap:32px;color-scheme:dark}
+:root{--bg:#0e0e16;--surface:#181826;--text:#f3f3f8;--muted:#a3a3b8;--line:#2a2a3d;--accent:#5b40bf;--accent-rgb:91,64,191;--ink:#ffffff;--r:18px;--r-sm:9px;--head:'Inter',sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--maxw:1080px;--gap:32px;color-scheme:dark}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;background:var(--bg);background-image:radial-gradient(60rem 30rem at 50% -10%,rgba(17,17,17,.18),transparent 70%);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{margin:0;background:var(--bg);background-image:radial-gradient(60rem 30rem at 50% -10%,rgba(91,64,191,.18),transparent 70%);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
 a,button{touch-action:manipulation}
 img{max-width:100%;display:block}
 h1,h2,h3{font-family:var(--head);line-height:1.15;margin:0;letter-spacing:-.01em;overflow-wrap:anywhere}
