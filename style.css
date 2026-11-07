@@ -1,5 +1,5 @@
 /* Generado por el diseño por bloques de Lynkia - se rehace al publicar desde "Bloques". */
-:root{--bg:#09090b;--surface:#141418;--text:#fafafa;--muted:#9b9ba5;--line:#26262d;--accent:#e8e8ec;--accent-rgb:232,232,236;--ink:#111111;--r:8px;--r-sm:4px;--head:'Space Grotesk',sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--maxw:1080px;--gap:32px;color-scheme:dark}
+:root{--bg:#fff5f1;--surface:#ffffff;--text:#2a1b17;--muted:#8b6a62;--line:#f6ded6;--accent:#d6457e;--accent-rgb:214,69,126;--ink:#ffffff;--r:22px;--r-sm:11px;--head:'Poppins',sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--maxw:1080px;--gap:32px;color-scheme:light}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
