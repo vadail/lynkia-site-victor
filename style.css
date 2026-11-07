@@ -1,13 +1,23 @@
 /* Generado por el diseño por bloques de Lynkia - se rehace al publicar desde "Bloques". */
-:root{--bg:#fff5f1;--surface:#ffffff;--text:#2a1b17;--muted:#8b6a62;--line:#f6ded6;--accent:#d6457e;--accent-rgb:214,69,126;--ink:#ffffff;--r:22px;--r-sm:11px;--head:'Poppins',sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--maxw:1080px;--gap:32px;color-scheme:light}
+:root{--bg:#0e0e16;--surface:#181826;--text:#f3f3f8;--muted:#a3a3b8;--line:#2a2a3d;--accent:#111111;--accent-rgb:17,17,17;--ink:#ffffff;--r:18px;--r-sm:9px;--head:'Inter',sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--maxw:1080px;--gap:32px;color-scheme:dark}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{margin:0;background:var(--bg);background-image:radial-gradient(60rem 30rem at 50% -10%,rgba(17,17,17,.18),transparent 70%);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
 a,button{touch-action:manipulation}
 img{max-width:100%;display:block}
 h1,h2,h3{font-family:var(--head);line-height:1.15;margin:0;letter-spacing:-.01em;overflow-wrap:anywhere}
 p{margin:0;overflow-wrap:anywhere}
 .lk-page{max-width:var(--maxw);margin:0 auto;padding:clamp(28px,6vw,64px) 16px 96px}
+/* Menu de las paginas (solo si hay mas de una): arriba, fijo al hacer scroll; en el movil sus enlaces se deslizan. */
+.lk-nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.lk-nav-in{max-width:var(--maxw);margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:8px 24px;flex-wrap:wrap}
+.lk-nav-brand{font-family:var(--head);font-weight:700;font-size:1.1rem;color:var(--text);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.lk-nav-links{display:flex;gap:4px 18px;margin-left:auto;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.lk-nav-links::-webkit-scrollbar{display:none}
+.lk-nav-links a{flex:0 0 auto;padding:6px 0;color:var(--muted);text-decoration:none;font-size:.95rem;font-weight:500;border-bottom:2px solid transparent;transition:color .15s ease}
+.lk-nav-links a:hover{color:var(--text)}
+.lk-nav-links a[aria-current=page]{color:var(--text);border-bottom-color:var(--accent)}
+@media (max-width:639px){.lk-nav-links{margin-left:0;width:100%}}
 /* La pagina apila filas; en cada fila, cada bloque mide sus columnas de las del lienzo (--s de --cols) y, si no la
    llena, se coloca a la izquierda, al centro o a la derecha (data-pos). Si en un movil no caben, bajan solos. */
 .lk-grid{display:flex;flex-direction:column;gap:var(--gap);--cols:1}
@@ -16,7 +26,7 @@ p{margin:0;overflow-wrap:anywhere}
 .lk-block{--s:var(--sm);flex:0 0 auto;min-width:0;width:calc((100% - (var(--cols) - 1) * var(--gap)) * var(--s) / var(--cols) + (var(--s) - 1) * var(--gap) - .05px)}
 .lk-block[data-pos=center]{margin-left:auto;margin-right:auto}
 .lk-block[data-pos=end]{margin-left:auto}
-@media (min-width:640px){.lk-page{padding-left:24px;padding-right:24px}.lk-grid{--cols:2}.lk-block{--s:var(--st)}}
+@media (min-width:640px){.lk-page,.lk-nav-in{padding-left:24px;padding-right:24px}.lk-grid{--cols:2}.lk-block{--s:var(--st)}}
 @media (min-width:1024px){.lk-grid{--cols:4}.lk-block{--s:var(--sd)}}
 .lk-block>h2,.lk-head h2{font-size:clamp(1.35rem,2.6vw,1.75rem);margin-bottom:.35rem}
 .lk-head{margin-bottom:1rem}.lk-head p{color:var(--muted)}
