@@ -56,10 +56,61 @@
     return '<span class="lk-price">' + old + from + esc(money(item.price_cents, item.currency, data.locale)) + "</span>";
   }
 
+  // Varias fotos: se deslizan (con el dedo, o con las flechas al pasar el raton), con puntos que marcan la actual.
+  function photos(item, data) {
+    var list = item.images && item.images.length ? item.images : item.image ? [item.image] : [];
+    if (list.length < 2) return list.length ? '<img src="' + esc(list[0]) + '" alt="" loading="lazy">' : "";
+    var slides = "";
+    var dots = "";
+    for (var i = 0; i < list.length; i++) {
+      slides += '<img src="' + esc(list[i]) + '" alt="" loading="lazy" draggable="false">';
+      dots += i === 0 ? '<i class="on"></i>' : "<i></i>";
+    }
+    return (
+      '<div class="lk-slides">' + slides + "</div>" +
+      '<span class="lk-slide-btn lk-slide-prev" role="button" aria-label="' + esc(data.texts.prev || "") + '" aria-disabled="true">&#8249;</span>' +
+      '<span class="lk-slide-btn lk-slide-next" role="button" aria-label="' + esc(data.texts.next || "") + '">&#8250;</span>' +
+      '<span class="lk-dots" aria-hidden="true">' + dots + "</span>"
+    );
+  }
+
+  function wireSlides(root) {
+    var tracks = root.querySelectorAll(".lk-slides");
+    for (var i = 0; i < tracks.length; i++) {
+      (function (track) {
+        var media = track.parentNode;
+        var dots = media.querySelectorAll(".lk-dots i");
+        var prev = media.querySelector(".lk-slide-prev");
+        var next = media.querySelector(".lk-slide-next");
+        var frame = 0;
+        function update() {
+          frame = 0;
+          var index = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+          for (var d = 0; d < dots.length; d++) dots[d].className = d === index ? "on" : "";
+          if (prev) prev.setAttribute("aria-disabled", index <= 0 ? "true" : "false");
+          if (next) next.setAttribute("aria-disabled", index >= dots.length - 1 ? "true" : "false");
+        }
+        track.addEventListener("scroll", function () {
+          if (!frame) frame = window.requestAnimationFrame(update);
+        }, { passive: true });
+        function go(step) {
+          return function (e) {
+            // La tarjeta es un enlace: pasar de foto no la abre.
+            e.preventDefault();
+            e.stopPropagation();
+            track.scrollBy({ left: step * track.clientWidth, behavior: "smooth" });
+          };
+        }
+        if (prev) prev.addEventListener("click", go(-1));
+        if (next) next.addEventListener("click", go(1));
+      })(tracks[i]);
+    }
+  }
+
   function card(item, block, data, featured) {
     var media =
       '<div class="lk-card-media">' +
-      (item.image ? '<img src="' + esc(item.image) + '" alt="" loading="lazy">' : "") +
+      photos(item, data) +
       (featured ? '<span class="lk-badge">' + esc(data.texts.featured) + "</span>" : "") +
       (item.sold_out ? '<span class="lk-badge lk-badge-out">' + esc(data.texts.sold_out) + "</span>" : "") +
       "</div>";
@@ -70,6 +121,9 @@
       '<div class="lk-card-body">' +
       (item.kind_label ? '<span class="lk-card-kind">' + esc(item.kind_label) + "</span>" : "") +
       '<span class="lk-card-title">' + esc(item.title) + "</span>" +
+      (item.rating && item.rating.count
+        ? '<span class="lk-card-rating"><span class="lk-stars" style="--r:' + item.rating.average + '"></span>' + esc(String(item.rating.average).replace(".", ",")) + " <span>(" + item.rating.count + ")</span></span>"
+        : "") +
       (meta.length ? '<span class="lk-card-meta">' + esc(meta.join(" · ")) + "</span>" : "") +
       (block.show.description && item.description ? '<span class="lk-card-desc">' + esc(item.description) + "</span>" : "") +
       '<span class="lk-card-foot">' +
@@ -98,6 +152,7 @@
       var html = block.featured ? card(block.featured, block, data, true) : "";
       for (var j = 0; j < block.items.length; j++) html += card(block.items[j], block, data, false);
       slot.innerHTML = html || '<p class="lk-empty">' + esc(data.texts.empty) + "</p>";
+      wireSlides(slot);
     }
   }
 

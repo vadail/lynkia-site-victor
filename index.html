@@ -1,31 +1,485 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>if(/iPad|iPhone|iPod/.test(navigator.userAgent)){var m=document.querySelector('meta[name=viewport]');m&&m.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1')}</script>
-  <title>Victor</title>
-  <meta name="description" content="Content about Tecnología" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'><rect%20width='64'%20height='64'%20rx='14'%20fill='%235b40bf'/><text%20x='32'%20y='44'%20font-size='32'%20font-family='Arial,sans-serif'%20font-weight='700'%20fill='white'%20text-anchor='middle'>V</text></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=228d72a8c1" />
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Víctor — Tecnología, producto digital e IA</title>
+<meta name="description" content="Víctor: experto en tecnología, producto digital, estrategia e IA. Apasionado de las startups y los negocios. Owner de Lynkia.app.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'&gt;
+&lt;rect%20width='64'%20height='64'%20rx='14'%20fill='%230a0a0d'/&gt;&lt;text%20x='32'%20y='44'%20font-family='Georgia,serif'%20font-size='36'%20fill='%23e4b45c'%20text-anchor='middle'&gt;V&lt;/text&gt;&lt;/svg&gt;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>:root{
+  --bg:#0b0a10;
+  --surface:#14121c;
+  --text:#f2f1f6;
+  --muted:#a9a7b8;
+  --line:rgba(255,255,255,.09);
+  --accent:#7a5de5;
+  --accent-rgb:122,93,229;
+  --accent-soft:#9d85f5;
+  --ink:#ffffff;
+  --r:20px;
+  --r-sm:12px;
+  --head:"Sora",system-ui,sans-serif;
+  --body:"Manrope",system-ui,sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:1.05rem;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+  background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='linear' slope='0.05'/></feComponentTransfer></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+}
+::selection{background:var(--accent);color:var(--ink)}
+img,svg{display:block}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,40px);position:relative;z-index:2}
+.skip{position:absolute;left:0;top:0;transform:translateY(-110%);background:var(--accent);color:var(--ink);padding:.6rem 1rem;border-radius:0 0 8px 0;z-index:100;font-weight:700;text-decoration:none}
+.skip:focus{transform:none}
+
+/* ============ HEADER ============ */
+.site-head{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;border-bottom:1px solid transparent}
+.site-head.scrolled{background:rgba(11,10,16,.82);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+.head-in{display:flex;align-items:center;justify-content:space-between;padding-top:18px;padding-bottom:18px}
+.brand{display:inline-flex;align-items:center;gap:.65rem;text-decoration:none}
+.brand-mark{
+  width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+  font-family:var(--serif);font-size:1.4rem;color:var(--ink);
+  background:linear-gradient(135deg,#967ff3,var(--accent) 55%,#5638c8);
+  box-shadow:0 0 22px rgba(var(--accent-rgb),.4);
+}
+.brand-name{font-family:var(--head);font-weight:700;font-size:1.02rem;letter-spacing:.01em}
+.brand-name em{font-style:normal;color:var(--muted);font-weight:500;font-size:.85em;margin-left:.35rem}
+.nav-menu{display:flex;align-items:center;gap:1.9rem;list-style:none}
+.nav-menu a:not(.btn){text-decoration:none;color:var(--muted);font-weight:600;font-size:.92rem;letter-spacing:.02em;position:relative;padding:.4rem 0;transition:color .25s}
+.nav-menu a:not(.btn)::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:0;background:var(--accent-soft);transition:width .3s ease}
+.nav-menu a:not(.btn):hover{color:var(--text)}
+.nav-menu a:not(.btn):hover::after{width:100%}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:46px;height:46px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.nav-toggle span{width:20px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s}
+.nav-toggle[aria-expanded="true"] span:first-child{transform:translateY(4px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:last-child{transform:translateY(-4px) rotate(-45deg)}
+[hidden]{display:none!important}
+
+/* ============ BOTONES ============ */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:linear-gradient(135deg,var(--accent),#6a48dd 60%,#5638c8);
+  background-color:var(--accent);
+  color:var(--ink);font-weight:700;font-size:.98rem;font-family:var(--body);
+  padding:.85rem 1.6rem;border-radius:999px;text-decoration:none;border:none;cursor:pointer;
+  box-shadow:0 0 26px rgba(var(--accent-rgb),.3),inset 0 1px 0 rgba(255,255,255,.22);
+  transition:transform .25s ease,box-shadow .25s ease;
+  min-height:44px;
+}
+.btn svg{width:18px;height:18px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 34px rgba(var(--accent-rgb),.5),inset 0 1px 0 rgba(255,255,255,.22)}
+.btn-ghost{
+  background:rgba(255,255,255,.05);color:var(--text);
+  border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(8px);
+}
+.btn-ghost:hover{box-shadow:0 0 24px rgba(var(--accent-rgb),.18);border-color:rgba(var(--accent-rgb),.55)}
+.btn-sm{padding:.55rem 1.15rem;font-size:.88rem}
+.btn:focus-visible,.nav-toggle:focus-visible,a:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px;border-radius:6px}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;padding:clamp(130px,18vh,180px) 0 clamp(70px,9vw,110px);overflow:hidden}
+.hero-glow{
+  position:absolute;top:-20%;left:50%;transform:translateX(-50%);
+  width:min(900px,120vw);height:620px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(var(--accent-rgb),.22),rgba(var(--accent-rgb),.06) 55%,transparent 75%);
+  filter:blur(10px);
+}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:72px 72px;
+  -webkit-mask-image:radial-gradient(ellipse 75% 60% at 50% 38%,#000 30%,transparent 78%);
+          mask-image:radial-gradient(ellipse 75% 60% at 50% 38%,#000 30%,transparent 78%);
+}
+.hero-watermark{
+  position:absolute;right:-2%;bottom:-4%;font-family:var(--head);font-weight:800;
+  font-size:clamp(6rem,18vw,15rem);letter-spacing:-.02em;color:transparent;
+  -webkit-text-stroke:1px rgba(var(--accent-rgb),.14);pointer-events:none;user-select:none;line-height:1;
+}
+.hero-in{max-width:860px}
+.eyebrow{
+  font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-soft);
+  display:flex;align-items:center;gap:.9rem;margin-bottom:1.6rem;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent-soft);flex:none}
+h1{
+  font-family:var(--head);font-weight:800;letter-spacing:-.03em;line-height:1.04;
+  font-size:clamp(2.6rem,7.2vw,5.4rem);margin-bottom:1.6rem;max-width:16ch;
+}
+h1 em,h2 em,.contact-title em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0;color:var(--accent-soft)}
+.lede{font-size:clamp(1.08rem,1.6vw,1.28rem);color:var(--muted);max-width:56ch;margin-bottom:2.4rem}
+.lynkia{color:var(--text);font-weight:700;border-bottom:1px solid rgba(var(--accent-rgb),.6)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.8rem}
+.hero-meta{display:flex;flex-wrap:wrap;gap:1.8rem;list-style:none;color:var(--muted);font-size:.88rem;font-weight:600;letter-spacing:.04em}
+.hero-meta li{display:flex;align-items:center;gap:.55rem}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(var(--accent-rgb),.9);flex:none}
+
+/* ============ MARQUEE ============ */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:1.1rem 0;background:rgba(255,255,255,.015)}
+.marquee-track{display:flex;align-items:center;gap:2.6rem;width:max-content;animation:scroll 34s linear infinite}
+.marquee-track span{font-family:var(--head);font-weight:600;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.marquee-track i{color:var(--accent);font-style:normal;font-size:.6rem}
+@keyframes scroll{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+
+/* ============ SECCIONES ============ */
+.section{padding:clamp(64px,10vw,128px) 0;position:relative}
+.section-alt{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:1.1rem;margin-bottom:1.4rem}
+.sec-num{font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--accent-soft)}
+.sec-label{font-size:.76rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.sec-title{font-family:var(--head);font-weight:800;letter-spacing:-.025em;line-height:1.1;font-size:clamp(2rem,4.6vw,3.3rem);margin-bottom:1rem;max-width:22ch}
+.sec-intro{color:var(--muted);max-width:52ch;margin-bottom:2.8rem}
+
+/* ============ SOBRE MÍ ============ */
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,5vw,5rem);align-items:start}
+.about-text h2{font-family:var(--head);font-weight:800;letter-spacing:-.025em;line-height:1.1;font-size:clamp(2rem,4.4vw,3.2rem);margin-bottom:1.5rem}
+.about-text p{color:var(--muted);margin-bottom:1.2rem;max-width:54ch}
+.about-text strong{color:var(--text)}
+.about-sign{color:var(--text)!important;font-family:var(--serif);font-style:italic;font-size:1.25rem;line-height:1.5;border-left:2px solid var(--accent);padding-left:1.2rem;margin-top:1.8rem}
+.about-cards{display:grid;gap:1.1rem}
+.glass-card{
+  background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  border:1px solid var(--line);border-radius:var(--r);padding:1.7rem 1.8rem;
+  backdrop-filter:blur(10px);
+  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.glass-card:hover{transform:translateY(-4px);border-color:rgba(var(--accent-rgb),.5);box-shadow:0 14px 44px rgba(0,0,0,.45),0 0 30px rgba(var(--accent-rgb),.1)}
+.card-icon{
+  width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:1.1rem;
+  color:var(--accent-soft);background:rgba(var(--accent-rgb),.12);border:1px solid rgba(var(--accent-rgb),.35);
+}
+.card-icon svg{width:22px;height:22px}
+.glass-card h3{font-family:var(--head);font-weight:700;font-size:1.15rem;margin-bottom:.45rem;letter-spacing:-.01em}
+.glass-card p{color:var(--muted);font-size:.95rem}
+
+/* ============ CONTACTO ============ */
+.contact{overflow:hidden;text-align:left}
+.contact-glow{
+  position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);
+  width:min(1000px,130vw);height:560px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(var(--accent-rgb),.17),transparent 72%);
+}
+.contact-title{font-family:var(--head);font-weight:800;letter-spacing:-.03em;line-height:1.06;font-size:clamp(2.4rem,6vw,4.4rem);margin-bottom:1.4rem;max-width:16ch}
+.contact-sub{color:var(--muted);max-width:50ch;font-size:1.1rem;margin-bottom:2.6rem}
+.contact-mail{
+  display:inline-block;font-family:var(--head);font-weight:700;letter-spacing:-.01em;
+  font-size:clamp(1.35rem,3.4vw,2.2rem);text-decoration:none;color:var(--text);
+  border-bottom:2px solid rgba(var(--accent-rgb),.6);padding-bottom:.15rem;
+  transition:color .25s,border-color .25s;margin-bottom:2.2rem;
+}
+.contact-mail:hover{color:var(--accent-soft);border-color:var(--accent-soft)}
+.contact-btns{display:flex;flex-wrap:wrap;gap:1rem}
+
+/* ============ FOOTER ============ */
+.site-foot{border-top:1px solid var(--line);padding:2.6rem 0;background:rgba(255,255,255,.015)}
+.foot-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.4rem}
+.foot-nav{display:flex;flex-wrap:wrap;gap:1.6rem}
+.foot-nav a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:600;transition:color .25s}
+.foot-nav a:hover{color:var(--accent-soft)}
+.foot-note{color:var(--muted);font-size:.82rem;letter-spacing:.06em;width:100%;text-align:left;opacity:.75}
+
+/* ============ REVEAL ============ */
+html.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);animation:reveal-backup .01s ease 3s forwards}
+html.js .reveal.in{opacity:1;transform:none}
+@keyframes reveal-backup{to{opacity:1;transform:none}}
+html.js .about-cards .reveal:nth-child(2){transition-delay:.1s}
+html.js .about-cards .reveal:nth-child(3){transition-delay:.2s}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  html.js .reveal{opacity:1;transform:none;transition:none}
+  *{transition-duration:.01ms!important}
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:899px){
+  .nav-toggle{display:flex}
+  .nav-menu{
+    position:absolute;top:calc(100% + 10px);right:clamp(20px,4vw,40px);left:clamp(20px,4vw,40px);
+    flex-direction:column;align-items:stretch;gap:.2rem;
+    background:rgba(18,16,26,.97);border:1px solid var(--line);border-radius:var(--r);
+    padding:1rem;box-shadow:0 24px 60px rgba(0,0,0,.6);backdrop-filter:blur(16px);
+  }
+  .nav-menu li a:not(.btn){display:block;padding:.85rem 1rem;border-radius:var(--r-sm);font-size:1rem}
+  .nav-menu li a:not(.btn):hover{background:rgba(255,255,255,.05)}
+  .nav-menu a:not(.btn)::after{display:none}
+  .nav-cta{margin-top:.6rem}
+  .nav-cta .btn{width:100%;justify-content:center}
+  .about-grid{grid-template-columns:1fr}
+  .hero{min-height:auto}
+  .hero-watermark{font-size:22vw;right:-4%}
+}
+@media (min-width:900px){
+  .nav-toggle{display:none}
+}
+@media (max-width:480px){
+  .hero-meta{gap:1rem}
+  .brand-name em{display:none}
+  .contact-btns .btn{width:100%;justify-content:center}
+  .hero-actions .btn{width:100%;justify-content:center}
+}
+/* Tarjetas de la tienda y el contenido (bloques vivos de Lynkia) */
+.lk-items{display:grid;grid-template-columns:repeat(var(--cm),minmax(0,1fr));gap:16px}
+@media (min-width:640px){.lk-items{grid-template-columns:repeat(var(--ct),minmax(0,1fr))}}
+@media (min-width:1024px){.lk-items{grid-template-columns:repeat(var(--cd),minmax(0,1fr))}}
+.lk-skel{aspect-ratio:4/5;border-radius:var(--r);background:linear-gradient(100deg,var(--surface) 30%,var(--line) 50%,var(--surface) 70%);background-size:300% 100%;animation:lk-sk 1.4s ease-in-out infinite}
+@keyframes lk-sk{to{background-position:-100% 0}}
+.lk-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;color:inherit;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease;min-width:0}
+.lk-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(var(--accent-rgb),.55)}
+.lk-card-media{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,rgba(var(--accent-rgb),.25),var(--surface))}
+.lk-card-media img{width:100%;height:100%;object-fit:cover}
+/* Las fotos de un producto se deslizan (08-11-2026): con el dedo, o con las flechas al pasar el raton. */
+.lk-slides{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+.lk-slides::-webkit-scrollbar{display:none}
+.lk-slides img{flex:0 0 100%;scroll-snap-align:start;-webkit-user-drag:none}
+.lk-slide-btn{position:absolute;top:50%;z-index:2;display:flex;align-items:center;justify-content:center;width:34px;height:34px;margin-top:-17px;border-radius:50%;background:rgba(255,255,255,.9);color:#111;font-size:20px;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.18);opacity:0;transform:scale(.85);transition:opacity .2s ease,transform .2s ease;cursor:pointer}
+.lk-slide-prev{left:10px}.lk-slide-next{right:10px}
+.lk-card:hover .lk-slide-btn{opacity:1;transform:none}
+.lk-slide-btn[aria-disabled=true]{opacity:0!important;pointer-events:none}
+.lk-dots{position:absolute;left:0;right:0;bottom:10px;z-index:2;display:flex;justify-content:center;gap:5px;pointer-events:none}
+.lk-dots i{width:6px;height:6px;border-radius:999px;background:rgba(255,255,255,.55);box-shadow:0 0 0 1px rgba(0,0,0,.08);transition:width .25s ease,background .25s ease}
+.lk-dots i.on{width:16px;background:#fff}
+@media (hover:none){.lk-slide-btn{display:none}}
+.lk-badge{position:absolute;top:10px;left:10px;padding:.2rem .6rem;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.02em}
+.lk-badge-out{left:auto;right:10px;background:#b42318}
+.lk-card-body{display:flex;flex-direction:column;gap:.35rem;padding:14px 16px 16px;flex:1}
+.lk-card-kind{color:var(--accent);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.lk-card-title{font-family:var(--head);font-size:1.05rem;font-weight:600;line-height:1.25}
+.lk-card-desc{color:var(--muted);font-size:.9rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.lk-card-meta{color:var(--muted);font-size:.82rem}
+.lk-card-rating{display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600}.lk-card-rating span{color:var(--muted);font-weight:400}
+.lk-stars{--p:calc(var(--r) / 5 * 100%);display:inline-block;font-size:.85rem;letter-spacing:1px;line-height:1;background:linear-gradient(90deg,#F5B301 var(--p),color-mix(in srgb,var(--text) 18%,transparent) var(--p));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lk-stars::before{content:"★★★★★"}
+.lk-card-foot{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-top:auto;padding-top:.5rem;flex-wrap:wrap}
+.lk-price{font-weight:700}.lk-price s{margin-right:.4rem;color:var(--muted);font-weight:500}
+.lk-btn{display:inline-block;padding:.5rem .95rem;border-radius:var(--r-sm);background:var(--accent);color:var(--ink);font-size:.85rem;font-weight:600;white-space:nowrap}
+.lk-featured{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr)}
+.lk-featured .lk-card-foot{margin-top:.75rem}
+@media (min-width:640px){.lk-featured{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.lk-featured .lk-card-media{aspect-ratio:16/10}.lk-featured .lk-card-body{padding:28px;justify-content:center}.lk-featured .lk-card-title{font-size:1.6rem}}
+.lk-empty{grid-column:1/-1;color:var(--muted);text-align:center;padding:24px;border:1px dashed var(--line);border-radius:var(--r)}
+@media (prefers-reduced-motion:reduce){.lk-card,.lk-link{transition:none}.lk-skel{animation:none}}
+
+/* Red de seguridad de Lynkia */
+[hidden]{display:none!important}
+html{overflow-x:clip}
+img,video{max-width:100%}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
 </head>
-<body data-lynkia-layout="2" data-lynkia-page="home">
-  
-  <main class="lk-page">
-    <div class="lk-grid">
-    <div class="lk-row"><header class="lk-block lk-hero" id="b04f49392" data-kind="hero" data-pos="center" style="--sd:4;--st:2;--sm:1" data-align="center"><div class="lk-hero-inner"><img class="lk-avatar" src="https://lh3.googleusercontent.com/a/ACg8ocIx1VX0AGw1Hi765ZylM_UbbmJr74M65halp_iY0w2k5mJTm0Oi=s96-c" alt="" width="112" height="112"><h1>Víctor Adaíl</h1><p class="lk-hero-sub">Content about Tecnología</p></div></header></div>
-    <div class="lk-row"><section class="lk-block lk-links" id="ba13eb42e" data-kind="links" data-pos="center" style="--sd:1;--st:1;--sm:1" data-style="solid"><nav class="lk-link-list"><a class="lk-link" href="https://instagram.com/vadail" target="_blank" rel="noopener noreferrer">Instagram</a><a class="lk-link" href="https://www.linkedin.com/in/vadail/" target="_blank" rel="noopener noreferrer">LinkedIn</a></nav></section></div>
-    <div class="lk-row"><section class="lk-block lk-text" id="bmw5phocq1" data-kind="text" data-pos="center" style="--sd:3;--st:1;--sm:1" data-align="left"><h2>About</h2><p>Telecommunications and Computer Engineer with a product mindset, specialized in AI Product Management, Data &amp; AI Platforms, and Digital Transformation. Over the last decade, I have led product and transformation initiatives across Cloud, Big Data, Mobile, Data Platforms, and AI within the banking and insurance industries.</p><p>Today I focus on AI Product Management and AI Transformation, helping scale enterprise AI adoption through Generative AI, intelligent agents, and data products. My work combines product strategy, AI enablement, and customer success to accelerate business value across Data &amp; Analytics while redefining how people work with AI.</p><p>At BBVA, I lead strategic initiatives that improve AI adoption, execution, and customer outcomes. Previously, I led the BBVA Group Data Science &amp; Data Specialist Community, redefining its value proposition around capability building, execution excellence, and knowledge sharing across AI practitioners. I also led the creation and execution of FinAI Summit, bringing together more than 5,000 attendees and establishing it as a flagship AI event in financial services.</p><p>I enjoy building AI products, scaling AI capabilities across organizations, and turning emerging technologies into solutions that people actually use. My passion lies in helping organizations move from AI experimentation to measurable business impact through product thinking, collaboration, and continuous innovation.</p></section></div>
-    <div class="lk-row"><div class="lk-block lk-divider" id="bmw5n3vxu2" data-kind="divider" data-pos="center" style="--sd:4;--st:2;--sm:1" data-size="l" aria-hidden="true"></div></div>
-    <div class="lk-row"><section class="lk-block lk-shop" id="b1f46b13f" data-kind="shop" data-pos="center" style="--sd:4;--st:2;--sm:1"><div class="lk-head"><h2>Shop</h2></div><div class="lk-items" data-lynkia-block="b1f46b13f" style="--cd:3;--ct:2;--cm:1"><div class="lk-skel"></div><div class="lk-skel"></div><div class="lk-skel"></div></div></section></div>
-    <div class="lk-row"><div class="lk-block lk-divider" id="bmw5n4z4x4" data-kind="divider" data-pos="center" style="--sd:4;--st:2;--sm:1" data-size="l" aria-hidden="true"><hr></div></div>
-    <div class="lk-row"><section class="lk-block lk-content" id="bmw5n4tlu3" data-kind="content" data-pos="center" style="--sd:4;--st:2;--sm:1"><div class="lk-head"><h2>Courses and content</h2></div><div class="lk-items" data-lynkia-block="bmw5n4tlu3" style="--cd:3;--ct:2;--cm:1"><div class="lk-skel"></div><div class="lk-skel"></div><div class="lk-skel"></div></div></section></div>
+<body>
+
+<a class="skip" href="#contenido-principal">Saltar al contenido</a>
+
+<header class="site-head" id="top">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="Víctor, inicio">
+      <span class="brand-mark">V</span>
+      <span class="brand-name">Víctor<em>· tecnología</em></span>
+    </a>
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
+        <span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu" hidden="">
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#contenido">Contenido</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li class="nav-cta"><a class="btn btn-sm" href="mailto:victor@adail.es">Escríbeme</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido-principal">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <p class="hero-watermark" aria-hidden="true">VÍCTOR</p>
+    <div class="wrap hero-in">
+      <p class="eyebrow reveal">Estrategia · Producto digital · Inteligencia artificial</p>
+      <h1 class="reveal">Tecnología que <em>convierte</em> ideas en negocio.</h1>
+      <p class="lede reveal">Soy Víctor, experto en tecnología, producto digital, estrategia e IA. Apasionado de las startups y los negocios. Owner de <span class="lynkia">Lynkia.app</span>.</p>
+      <div class="hero-actions reveal">
+        <a class="btn" href="mailto:victor@adail.es">
+          Hablemos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/vadail/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M8 11v5M8 8v.01M12 16v-3a2 2 0 0 1 4 0v3"></path></svg>
+          LinkedIn
+        </a>
+      </div>
+      <ul class="hero-meta reveal" aria-label="Áreas de trabajo">
+        <li><span class="dot" aria-hidden="true"></span>Estrategia tecnológica</li>
+        <li><span class="dot" aria-hidden="true"></span>Producto digital</li>
+        <li><span class="dot" aria-hidden="true"></span>IA aplicada</li>
+      </ul>
     </div>
-  </main>
-  <script type="application/json" id="lynkia-site-config">{"handle": "victor", "api": "https://api.lynkia.app"}</script>
-  <script src="lynkia-site.js?v=4e0265fa39" defer></script>
-<div data-lynkia-badge style="all:revert;position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;justify-content:center;pointer-events:none;padding:10px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><a href="https://lynkia.app" target="_blank" rel="noopener noreferrer" style="all:revert;pointer-events:auto;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:#15151f;color:#fff;text-decoration:none;font-size:12px;font-weight:500;opacity:0.9;transition:opacity .15s;box-shadow:0 2px 12px rgba(0,0,0,.35);" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.9">Made with <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" style="all:revert;display:inline-block;vertical-align:middle;fill:#9B8CFF !important;"><path style="fill:#9B8CFF !important;" d="M12 21s-7.5-4.6-10.2-9.3C.3 8.8 1.4 5.3 4.6 4.2c2-.7 4.1 0 5.4 1.8 1.3-1.8 3.4-2.5 5.4-1.8 3.2 1.1 4.3 4.6 2.8 7.5C19.5 16.4 12 21 12 21z"/></svg> by Lynkia.app</a></div><script defer src="https://lynkia.app/lynkia-stats.js?v=1" data-lynkia-stats></script></body>
-</html>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Estrategia</span><i>◆</i><span>Producto digital</span><i>◆</i><span>Inteligencia artificial</span><i>◆</i><span>Startups</span><i>◆</i><span>Negocio</span><i>◆</i>
+      <span>Estrategia</span><i>◆</i><span>Producto digital</span><i>◆</i><span>Inteligencia artificial</span><i>◆</i><span>Startups</span><i>◆</i><span>Negocio</span><i>◆</i>
+    </div>
+  </div>
+
+  <!-- SOBRE MÍ -->
+  <section class="section" id="sobre-mi">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="sec-num">01</p>
+        <p class="sec-label">Sobre mí</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <h2>Del código a la <em>estrategia</em>.</h2>
+          <p>Soy experto en tecnología, producto digital, estrategia e IA. Me muevo con naturalidad entre lo técnico y lo de negocio: entiendo cómo se construye un producto y, sobre todo, por qué merece la pena construirlo.</p>
+          <p>Soy apasionado de las startups y los negocios, y canalizo esa pasión en <strong>Lynkia.app</strong>, mi propio producto. Conozco el camino completo: de la idea al mercado.</p>
+          <p class="about-sign">Si buscas a alguien que hable el idioma de la tecnología y el de los resultados, estás en el sitio correcto.</p>
+        </div>
+        <div class="about-cards">
+          <article class="glass-card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg>
+            </div>
+            <h3>Estrategia</h3>
+            <p>Visión de negocio aplicada a la tecnología: decidir qué construir, cuándo y con qué recursos.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"></rect><path d="M3 9h18M8 21h8"></path></svg>
+            </div>
+            <h3>Producto digital</h3>
+            <p>De la idea al lanzamiento: definición, priorización y ejecución de productos que la gente usa.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"></path></svg>
+            </div>
+            <h3>Inteligencia artificial</h3>
+            <p>IA con criterio: dónde aporta valor real, cómo integrarla y cómo convertirla en ventaja.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS (bloque vivo) -->
+  <section class="section section-alt" id="productos">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="sec-num">02</p>
+        <p class="sec-label">Productos</p>
+      </div>
+      <h2 class="sec-title reveal">Productos y <em>recursos</em></h2>
+      <p class="sec-intro reveal">Herramientas y productos digitales creados desde la experiencia.</p>
+      <div class="lk-items" data-lynkia-block="b1f46b13f" style="--cd:3;--ct:2;--cm:1"><div class="lk-skel"></div><div class="lk-skel"></div><div class="lk-skel"></div></div>
+    </div>
+  </section>
+
+  <!-- CONTENIDO (bloque vivo) -->
+  <section class="section" id="contenido">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="sec-num">03</p>
+        <p class="sec-label">Contenido</p>
+      </div>
+      <h2 class="sec-title reveal">Cursos, guías y <em>directos</em></h2>
+      <p class="sec-intro reveal">Conocimiento compartido: formación práctica sobre tecnología, producto e IA.</p>
+      <div class="lk-items" data-lynkia-block="bmw5n4tlu3" style="--cd:3;--ct:2;--cm:1"><div class="lk-skel"></div><div class="lk-skel"></div><div class="lk-skel"></div></div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section contact" id="contacto">
+    <div class="contact-glow" aria-hidden="true"></div>
+    <div class="wrap contact-in">
+      <div class="sec-head reveal">
+        <p class="sec-num">04</p>
+        <p class="sec-label">Contacto</p>
+      </div>
+      <h2 class="contact-title reveal">¿Construimos algo <em>juntos</em>?</h2>
+      <p class="contact-sub reveal">Si buscas un experto en tecnología, producto digital o IA para tu empresa o tu próximo proyecto, escríbeme. Respondo personalmente.</p>
+      <div class="contact-actions reveal">
+        <a class="contact-mail" href="mailto:victor@adail.es">victor@adail.es</a>
+        <div class="contact-btns">
+          <a class="btn" href="mailto:victor@adail.es">
+            Enviar un email
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"></path><path d="M4 7l8 6 8-6"></path></svg>
+          </a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/vadail/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M8 11v5M8 8v.01M12 16v-3a2 2 0 0 1 4 0v3"></path></svg>
+            Conectar en LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-in">
+    <a class="brand" href="#top" aria-label="Volver arriba">
+      <span class="brand-mark">V</span>
+      <span class="brand-name">Víctor<em>· tecnología</em></span>
+    </a>
+    <nav class="foot-nav" aria-label="Navegación del pie">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#productos">Productos</a>
+      <a href="#contenido">Contenido</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <p class="foot-note">Tecnología · Producto digital · Estrategia · IA</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var html=document.documentElement;html.classList.add('js');
+  var toggle=document.getElementById('navToggle'),menu=document.getElementById('navMenu');
+  function setMenu(open){toggle.setAttribute('aria-expanded',open?'true':'false');toggle.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');if(open){menu.hidden=false;}else{menu.hidden=true;}}
+  toggle.addEventListener('click',function(){setMenu(menu.hidden);});
+  menu.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden)setMenu(false);});
+  var mq=window.matchMedia('(min-width:900px)');
+  function onMQ(){if(mq.matches){menu.hidden=false;toggle.setAttribute('aria-expanded','false');}else{menu.hidden=true;}}
+  if(mq.addEventListener)mq.addEventListener('change',onMQ);onMQ();
+  var head=document.querySelector('.site-head');
+  function onScroll(){head.classList.toggle('scrolled',window.scrollY>24);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+    var revealInView=function(){document.querySelectorAll('.reveal:not(.in)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight*.95){el.classList.add('in');}});};
+    window.addEventListener('scroll',revealInView,{passive:true});
+    setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});},2500);
+  }else{
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+  }
+})();
+</script>
+<script type="application/json" id="lynkia-site-config">{"handle": "victor", "api": "https://api.lynkia.app"}</script>
+  <script src="lynkia-site.js?v=d2191e4216" defer></script>
+<div data-lynkia-badge style="all:revert;position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;justify-content:center;pointer-events:none;padding:10px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"><a href="https://lynkia.app" target="_blank" rel="noopener noreferrer" style="all:revert;pointer-events:auto;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:#15151f;color:#fff;text-decoration:none;font-size:12px;font-weight:500;opacity:0.9;transition:opacity .15s;box-shadow:0 2px 12px rgba(0,0,0,.35);" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.9">Made with <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" style="all:revert;display:inline-block;vertical-align:middle;fill:#9B8CFF !important;"><path style="fill:#9B8CFF !important;" d="M12 21s-7.5-4.6-10.2-9.3C.3 8.8 1.4 5.3 4.6 4.2c2-.7 4.1 0 5.4 1.8 1.3-1.8 3.4-2.5 5.4-1.8 3.2 1.1 4.3 4.6 2.8 7.5C19.5 16.4 12 21 12 21z"/></svg> by Lynkia.app</a></div><script defer src="https://lynkia.app/lynkia-stats.js?v=1" data-lynkia-stats></script></body></html>
