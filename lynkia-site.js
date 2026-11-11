@@ -151,7 +151,7 @@
       }
       var html = block.featured ? card(block.featured, block, data, true) : "";
       for (var j = 0; j < block.items.length; j++) html += card(block.items[j], block, data, false);
-      slot.innerHTML = html || '<p class="lk-empty">' + esc(data.texts.empty) + "</p>";
+      slot.innerHTML = html || '<p class="lk-empty">' + esc(block.empty || data.texts.empty) + "</p>";
       wireSlides(slot);
     }
   }
