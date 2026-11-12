@@ -33,7 +33,6 @@ body{
   font-size:1.05rem;
   line-height:1.65;
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
 }
 body::before{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
@@ -279,6 +278,9 @@ html.js .about-cards .reveal:nth-child(3){transition-delay:.2s}
 html{overflow-x:clip}
 img,video{max-width:100%}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* La barra fija no debe perderse al hacer scroll (p.ej. al pulsar un enlace) */
+.site-head{transform:translateZ(0);-webkit-transform:translateZ(0);backface-visibility:hidden;will-change:transform}
 
 /* Tu foto y tu nombre */
 .lk-me3q9{padding:clamp(64px,10vw,120px) 20px;background:var(--bg,#fff);color:var(--text,#17171f)}
