@@ -59,7 +59,7 @@ a{color:inherit}
 }
 .brand-name{font-family:var(--head);font-weight:700;font-size:1.02rem;letter-spacing:.01em}
 .brand-name em{font-style:normal;color:var(--muted);font-weight:500;font-size:.85em;margin-left:.35rem}
-.nav-menu{display:flex;align-items:center;gap:1.9rem;list-style:none}
+.nav-menu{display:flex;align-items:center;gap:clamp(1.2rem,2.4vw,1.9rem);list-style:none}
 .nav-menu a:not(.btn){text-decoration:none;color:var(--muted);font-weight:600;font-size:.92rem;letter-spacing:.02em;position:relative;padding:.4rem 0;transition:color .25s}
 .nav-menu a:not(.btn)::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:0;background:var(--accent-soft);transition:width .3s ease}
 .nav-menu a:not(.btn):hover{color:var(--text)}
@@ -211,14 +211,14 @@ html.js .about-cards .reveal:nth-child(3){transition-delay:.2s}
   .nav-toggle{display:flex}
   .nav-menu{
     position:absolute;top:calc(100% + 10px);right:clamp(20px,4vw,40px);left:clamp(20px,4vw,40px);
-    flex-direction:column;align-items:stretch;gap:.2rem;
+    flex-direction:column;align-items:stretch;gap:.35rem;
     background:rgba(18,16,26,.97);border:1px solid var(--line);border-radius:var(--r);
     padding:1rem;box-shadow:0 24px 60px rgba(0,0,0,.6);backdrop-filter:blur(16px);
   }
   .nav-menu li a:not(.btn){display:block;padding:.85rem 1rem;border-radius:var(--r-sm);font-size:1rem}
   .nav-menu li a:not(.btn):hover{background:rgba(255,255,255,.05)}
   .nav-menu a:not(.btn)::after{display:none}
-  .nav-cta{margin-top:.6rem}
+  .nav-cta{margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--line)}
   .nav-cta .btn{width:100%;justify-content:center}
   .about-grid{grid-template-columns:1fr}
   .hero{min-height:auto}
@@ -310,8 +310,7 @@ img,video{max-width:100%}
 .lk-me507-photo img{border-radius:50%;box-shadow:0 0 0 6px var(--bg,#fff),0 0 0 9px var(--accent,#6d5efc)}
 .lk-me507-kicker{justify-content:center}
 .lk-me507-kicker::before{display:none}
-.lk-me507-text{margin-inline:auto}
-</style>
+.lk-me507-text{margin-inline:auto}</style>
 </head>
 <body>
 
@@ -329,16 +328,12 @@ img,video{max-width:100%}
       </button>
       <ul class="nav-menu" id="navMenu" hidden="">
         <li><a href="#sobre-mi">Sobre mí</a></li>
-        <li><a href="#productos">Productos</a></li>
-        <li><a href="#contenido">Contenido</a></li>
         <li><a href="#contacto">Contacto</a></li>
         <li class="nav-cta"><a class="btn btn-sm" href="mailto:victor@adail.es">Escríbeme</a></li>
       </ul>
     </nav>
   </div>
-</header>
-
-<main id="contenido-principal">
+</header><main id="contenido-principal">
 
   <!-- HERO -->
   <section class="hero">
@@ -450,6 +445,8 @@ img,video{max-width:100%}
 
 </main>
 
+
+
 <footer class="site-foot">
   <div class="wrap foot-in">
     <a class="brand" href="#top" aria-label="Volver arriba">
@@ -493,6 +490,8 @@ img,video{max-width:100%}
 </script>
 <script type="application/json" id="lynkia-site-config">{"handle": "victor", "api": "https://api.lynkia.app"}</script>
   <script src="lynkia-site.js?v=d2191e4216" defer=""></script>
+
+
 
 
 
