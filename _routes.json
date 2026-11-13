@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "include": [
+    "/c/victor",
+    "/c/victor/*",
+    "/access",
+    "/access/*",
+    "/pedido",
+    "/pedido/*",
+    "/survey",
+    "/survey/*",
+    "/live",
+    "/live/*",
+    "/app-assets",
+    "/app-assets/*",
+    "/lib",
+    "/lib/*",
+    "/terms",
+    "/terms/*",
+    "/privacy",
+    "/privacy/*"
+  ],
+  "exclude": []
+}
