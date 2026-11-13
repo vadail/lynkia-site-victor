@@ -1,24 +1,24 @@
 {
   "version": 1,
   "include": [
-    "/c/victor",
-    "/c/victor/*",
-    "/access",
-    "/access/*",
-    "/pedido",
-    "/pedido/*",
-    "/survey",
-    "/survey/*",
-    "/live",
-    "/live/*",
-    "/app-assets",
-    "/app-assets/*",
-    "/lib",
-    "/lib/*",
-    "/terms",
-    "/terms/*",
-    "/privacy",
-    "/privacy/*"
+    "/*"
   ],
-  "exclude": []
+  "exclude": [
+    "/",
+    "/index.html",
+    "/assets/*",
+    "/images/*",
+    "/img/*",
+    "/fonts/*",
+    "/static/*",
+    "/style.css",
+    "/favicon.ico",
+    "/favicon.png",
+    "/favicon.svg",
+    "/robots.txt",
+    "/sitemap.xml",
+    "/_headers",
+    "/lynkia-site.js",
+    "/lynkia-stats.js"
+  ]
 }
