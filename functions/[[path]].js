@@ -1,10 +1,14 @@
 // Paginas de compra de esta tienda servidas bajo este dominio (fichero generado al conectar el dominio; no editar).
 // La ficha, el curso, el carrito, el pago, el pedido y el acceso se piden a la app y se sirven desde aqui, con el
-// nombre y el icono de la tienda. Solo pasan por aqui las rutas de _routes.json; el resto de la web, no.
+// nombre y el icono de la tienda. Los cursos tienen ademas su direccion bonita en la raiz de la web (<dominio>/<curso>).
+// Todo lo demas sigue con `context.next()`: la web del creador se sirve como siempre.
 const APP = "https://lynkia.app";
 const API = "https://api.lynkia.app";
 const HANDLE = "victor";
 const PREFIXES = ["/access", "/pedido", "/survey", "/live", "/app-assets", "/lib", "/terms", "/privacy"];
+const VERSION = "2";
+// Direcciones de la raiz que nunca son de un curso (las de la app y las propias de esta funcion).
+const RESERVED = new Set(["c", "_lynkia", ...PREFIXES.map((p) => p.replace(/^\//, ""))]);
 
 function esc(value) {
   return String(value == null ? "" : value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -43,6 +47,8 @@ export function rebrand(html, p, href) {
   html = html.replace(/<meta[^>]+(?:property|name)="(?:og:image|twitter:image)"[^>]*content="[^"]*lynkia-icon[^"]*"[^>]*>/gi, (tag) =>
     p && p.avatar_url ? tag.replace(/content="[^"]*"/, `content="${esc(p.avatar_url)}"`) : ""
   );
+  // La app sabe de quien es esta tienda (la direccion bonita de un curso no lleva el handle): ver frontend/src/lib/storeHost.ts.
+  html = html.replace("</head>", `<script>window.__LYNKIA_HANDLE__=${JSON.stringify(HANDLE)};</script></head>`);
   return html;
 }
 
@@ -51,16 +57,39 @@ function proxied(path) {
   return PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`));
 }
 
+// <dominio>/<curso>: una sola direccion, sin extension y que no sea de la app. Solo la API sabe si es un curso de este creador.
+async function courseSlug(path) {
+  const match = path.match(/^\/([a-z0-9][a-z0-9-]{0,79})\/?$/);
+  if (!match || RESERVED.has(match[1])) return null;
+  try {
+    const res = await fetch(`${API}/private-content/public/${HANDLE}/resolve/${match[1]}`, { cf: { cacheTtl: 300, cacheEverything: true } });
+    return res.ok ? match[1] : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 export async function onRequest(context) {
   const request = context.request;
   const url = new URL(request.url);
-  if (!proxied(url.pathname)) return context.next();
+  if (url.pathname === "/_lynkia/health") {
+    return new Response(JSON.stringify({ version: VERSION, handle: HANDLE }), { headers: { "content-type": "application/json", "cache-control": "no-store" } });
+  }
+  let upstreamPath = null;
+  if (proxied(url.pathname)) upstreamPath = url.pathname;
+  else if (request.method === "GET" || request.method === "HEAD") {
+    const slug = await courseSlug(url.pathname);
+    if (slug) upstreamPath = `/c/${HANDLE}/${slug}`;
+  }
+  if (upstreamPath === null) return context.next();
   const headers = new Headers();
   for (const h of ["accept", "accept-language", "user-agent", "if-none-match", "if-modified-since"]) {
     const v = request.headers.get(h);
     if (v) headers.set(h, v);
   }
-  const upstream = await fetch(APP + url.pathname + url.search, {
+  // La app (frontend/functions/c/) no redirige a la direccion bonita lo que pide esta funcion: seria un bucle.
+  headers.set("x-lynkia-store", "1");
+  const upstream = await fetch(APP + upstreamPath + url.search, {
     method: request.method === "HEAD" ? "HEAD" : "GET",
     headers,
     redirect: "manual",
